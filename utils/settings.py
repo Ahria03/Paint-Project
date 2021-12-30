@@ -12,7 +12,7 @@ BLUE = (0, 255, 0)
 GREEN = (0, 0, 255)
 
 # Base FPS and size of Program
-FPS = 60
+FPS = 120
 WIDTH, HEIGHT = 600, 700
 ROWS = COLS = 100
 
