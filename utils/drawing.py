@@ -23,6 +23,22 @@ def init_grid(rows, cols, color):
             grid[index].append(color)
             
     return grid
+  
+def draw_grid_lines(bool, win):
+    """[Draw the Grid Lines]
+
+    Args:
+        bool ([Bool]): [True or False for Grid lines]
+        win ([Tuple]): [Program Window]
+    """
+    if bool:
+        for i in range(ROWS+1):
+            pygame.draw.line(win, BLACK, (0, i * PIXEL_SIZE), 
+                             (WIDTH, i * PIXEL_SIZE))
+        
+        for j in range(COLS):
+            pygame.draw.line(win, BLACK, (j * PIXEL_SIZE, 0), 
+                             (j * PIXEL_SIZE, HEIGHT - TOOLBAR_HEIGHT), 1)
     
 def draw_grid(win, grid):
     """[Draw Grid containing Pixels and Draw Grid 
@@ -37,16 +53,17 @@ def draw_grid(win, grid):
             pygame.draw.rect(win, pixel, (j * PIXEL_SIZE, i * PIXEL_SIZE, 
                                           PIXEL_SIZE, PIXEL_SIZE))
             
-    if DRAW_GRID_LINES:
-        for i in range(ROWS+1):
-            pygame.draw.line(win, BLACK, (0, i * PIXEL_SIZE), 
-                             (WIDTH, i * PIXEL_SIZE))
-        
-        for j in range(COLS):
-            pygame.draw.line(win, BLACK, (j * PIXEL_SIZE, 0), 
-                             (j * PIXEL_SIZE, HEIGHT - TOOLBAR_HEIGHT), 1)
+    draw_grid_lines(DRAW_GRID_LINES, win)
+   
+def draw_toolbar_bar(win):
+    """[Draw the Bar on the Toolbar]
+
+    Args:
+        win ([Tuple]): [Program Window]
+    """
+    pygame.draw.rect(win, BLACK, (0, HEIGHT - TOOLBAR_HEIGHT + 1, WIDTH, 3))
             
-def draw(win, grid, buttons):
+def draw(win, grid, buttons, shades):
     """[Draw the display and fill it in with 
     Background Color and Buttons]
 
@@ -54,12 +71,18 @@ def draw(win, grid, buttons):
         win ([Tuple]): [Window Display of Program]
         grid ([List]): [Grid containing Pixels]
         buttons ([List]): [List of Button Objects]
+        shades ([List]): [List of Shade Button Objects]
     """
     win.fill(BG_COLOR)
     draw_grid(win, grid)
+    draw_toolbar_bar(win)
     
     for button in buttons:
         button.draw(win)
+    
+    if shades is not None:
+        for button in shades:
+            button.draw(win)
     
     pygame.display.update()
     
@@ -81,3 +104,33 @@ def get_row_col_from_pos(pos):
     
     return row,col
 
+def brush(size, pos, grid, drawing_color):
+    """[Change the size of the brush]
+
+    Args:
+        size ([Int]): [Size of Brush]
+        pos ([Tuple]): [Pixel clicked]]
+        grid ([List]): [Drawing Grid]
+        drawing_color ([Str]): [Color to fill Pixel]
+    """
+    row, col = get_row_col_from_pos(pos)
+             
+    for x in range(size):
+        for y in range(size):
+            try:
+                grid[row+y][col+x] = drawing_color
+            except IndexError:
+                pass
+            try:
+                grid[row+y][col-x] = drawing_color
+            except IndexError:
+                pass
+            try:
+                grid[row-y][col+x] = drawing_color
+            except IndexError:
+                pass
+            try:
+                grid[row-y][col-x] = drawing_color
+            except IndexError:
+                pass
+        
