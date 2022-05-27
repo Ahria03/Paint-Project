@@ -60,8 +60,8 @@ YELLOWR2 = (255, 255, 128)
 
 # Base FPS and size of Program
 FPS = 180
-WIDTH, HEIGHT = 800, 900
-ROWS = COLS = 160
+WIDTH, HEIGHT = 600, 700
+ROWS = COLS = 50
 
 # Toolbar size and pixel size
 # Does not need to be touched, change prior info instead.

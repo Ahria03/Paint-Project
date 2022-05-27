@@ -1,3 +1,5 @@
+import pygame as pygame
+
 from utils import *
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT)) # Initialize Window
