@@ -2,6 +2,7 @@
 .idea/
 *.iml
 *.iws
+utils/__pycache__/
 out/
 artifacts/
 target/
