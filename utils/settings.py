@@ -60,7 +60,9 @@ YELLOWR2 = (255, 255, 128)
 
 # Base FPS and size of Program
 FPS = 180
-WIDTH, HEIGHT = 600, 700
+x = pygame.display.Info()
+h = (x.current_h // 100)*100 - 100
+WIDTH, HEIGHT = h - 100, h
 ROWS = COLS = 50
 
 # Toolbar size and pixel size
