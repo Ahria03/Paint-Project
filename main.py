@@ -25,7 +25,7 @@ while run:
         if pygame.mouse.get_pressed()[0]:
             pos = pygame.mouse.get_pos()
             try:
-                brush(brush_size, pos, grid, drawing_color)
+                draw(brush_size, pos, grid, drawing_color)
             except IndexError:
                 # We've clicked off the drawing, check if a button is clicked
                 is_color, button = check_button_clicked(buttons, pos)
@@ -43,12 +43,12 @@ while run:
                     # If button changes size
                     if button.change_size():
                         brush_size = button.size
-                    # Else its a main color so it opens shades
+                    # Else it's a main color so it opens shades
                     else:
                         current_shades = button.shade
                 elif is_shade:
                     drawing_color = shade.color
 
-    draw(WIN, grid, buttons, current_shades)  # Draw screen
+    update(WIN, grid, buttons, current_shades)  # Draw screen
 
 pygame.quit()

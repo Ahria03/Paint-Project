@@ -37,16 +37,16 @@ def draw_grid(win, grid):
     for row_index, row in enumerate(grid):
         for col_index, pixel_color in enumerate(row):
             pygame.draw.rect(win, pixel_color, (
-                col_index * PIXEL_SIZE,             # X
-                row_index * PIXEL_SIZE,             # Y
-                PIXEL_SIZE,                         # Width
-                PIXEL_SIZE))                        # Height
+                col_index * PIXEL_SIZE,                          # X
+                row_index * PIXEL_SIZE,                          # Y
+                PIXEL_SIZE,                                      # Width
+                PIXEL_SIZE))                                     # Height
     # Check if grid lines are flagged to True
     if DRAW_GRID_LINES:
         for row_index in range(ROWS + 1):
             pygame.draw.line(win, BLACK,
-                             (0, row_index * PIXEL_SIZE),       # Start Pos
-                             (WIDTH, row_index * PIXEL_SIZE))   # End Pos
+                             (0, row_index * PIXEL_SIZE),        # Start Pos
+                             (WIDTH, row_index * PIXEL_SIZE))    # End Pos
         for col_index in range(COLS):
             pygame.draw.line(win, BLACK,
                              (col_index * PIXEL_SIZE, 0),
@@ -66,8 +66,8 @@ def draw_toolbar_bar(win):
         3))
 
 
-def draw(win, grid, buttons, shades):
-    """Create / Update the Display
+def update(win, grid, buttons, shades):
+    """ Create / Update the Display
 
     Args:
         win: Window Display of Program
@@ -75,9 +75,9 @@ def draw(win, grid, buttons, shades):
         buttons (list): List of Button Objects
         shades (list): List of Shade Button Objects
     """
-    win.fill(BG_COLOR)  # Reset Window
-    draw_grid(win, grid)  # Update Grid
-    draw_toolbar_bar(win)  # Update Toolbar
+    win.fill(BG_COLOR)        # Reset Window
+    draw_grid(win, grid)      # Update Grid
+    draw_toolbar_bar(win)     # Update Toolbar
     # Update Buttons
     for button in buttons:
         button.draw(win)
@@ -90,6 +90,7 @@ def draw(win, grid, buttons, shades):
 
 def get_row_col_from_pos(pos):
     """Decompose the Position to find Pixel Location
+    \nThrows an IndexError if clicked off grid
 
     Args:
         pos (tuple): X,Y
@@ -106,32 +107,26 @@ def get_row_col_from_pos(pos):
     return row, col
 
 
-def brush(size, pos, grid, drawing_color):
-    """[Change the size of the brush]
+def draw(size, pos, grid, drawing_color):
+    """
+    Draw pixel(s) on the drawing grid
 
     Args:
-        size ([Int]): [Size of Brush]
-        pos ([Tuple]): [Pixel clicked]]
-        grid ([List]): [Drawing Grid]
-        drawing_color ([Str]): [Color to fill Pixel]
+        size (int): Brush Size
+        pos (tuple): Position Clicked
+        grid (list): Drawing Grid Pixels
+        drawing_color (tuple): RGB
     """
+    # If original point is off-grid, method throws error
     row, col = get_row_col_from_pos(pos)
-
-    for x in range(size):
-        for y in range(size):
+    if size % 2 == 1:
+        floored_val = size // 2
+    else:
+        floored_val = (size // 2) - 1
+    for row_index in range(size):
+        for col_index in range(size):
             try:
-                grid[row + y][col + x] = drawing_color
+                if row + row_index - floored_val >= 0 and col + col_index - floored_val >= 0:
+                    grid[row + row_index - floored_val][col + col_index - floored_val] = drawing_color
             except IndexError:
-                pass
-            try:
-                grid[row + y][col - x] = drawing_color
-            except IndexError:
-                pass
-            try:
-                grid[row - y][col + x] = drawing_color
-            except IndexError:
-                pass
-            try:
-                grid[row - y][col - x] = drawing_color
-            except IndexError:
-                pass
+                continue

@@ -34,7 +34,7 @@ PIXEL_SIZE = WIDTH // ROWS
 
 # Base background color and grid lines
 BG_COLOR = WHITE
-DRAW_GRID_LINES = True
+DRAW_GRID_LINES = False
 
 
 # Return Font at requested Size
