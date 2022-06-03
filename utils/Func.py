@@ -37,16 +37,16 @@ def draw_grid(win, grid):
     for row_index, row in enumerate(grid):
         for col_index, pixel_color in enumerate(row):
             pygame.draw.rect(win, pixel_color, (
-                col_index * PIXEL_SIZE,  # X
-                row_index * PIXEL_SIZE,  # Y
-                PIXEL_SIZE,  # Width
-                PIXEL_SIZE))  # Height
+                col_index * PIXEL_SIZE,             # X
+                row_index * PIXEL_SIZE,             # Y
+                PIXEL_SIZE,                         # Width
+                PIXEL_SIZE))                        # Height
     # Check if grid lines are flagged to True
     if DRAW_GRID_LINES:
         for row_index in range(ROWS + 1):
             pygame.draw.line(win, BLACK,
-                             (0, row_index * PIXEL_SIZE),  # Start Pos
-                             (WIDTH, row_index * PIXEL_SIZE))  # End Pos
+                             (0, row_index * PIXEL_SIZE),       # Start Pos
+                             (WIDTH, row_index * PIXEL_SIZE))   # End Pos
         for col_index in range(COLS):
             pygame.draw.line(win, BLACK,
                              (col_index * PIXEL_SIZE, 0),
