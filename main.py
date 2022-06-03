@@ -1,30 +1,31 @@
+# Import the Utils Package
 from utils import *
 
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))  # Initialize Window
-pygame.display.set_caption("Sample Drawing Game")
-
-run = True  # Always initially True
-clock = pygame.time.Clock()  # Initialize clock
-grid = init_grid(ROWS, COLS, BG_COLOR)  # Initialize grid
+# Initialize Functionality
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Pyxel Art")
+run = True
+clock = pygame.time.Clock()
+grid = init_grid(ROWS, COLS, BG_COLOR)
 drawing_color = BLACK
 current_shades = []
 brush_size = 1
 
 while run:
-    clock.tick(FPS)  # Only move as fast as FPS
-
-    # Check every event
+    clock.tick(FPS)
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:  # If user quit
+
+        # If the user is quitting the application
+        if event.type == pygame.QUIT:
             run = False
 
-        if pygame.mouse.get_pressed()[0]:  # If user Left Clicks
-            pos = pygame.mouse.get_pos()  # Get X,Y Position of Spot Clicked
+        # Check if the user is LEFT-CLICKING represented by the [0]
+        if pygame.mouse.get_pressed()[0]:
+            pos = pygame.mouse.get_pos()
             try:
                 brush(brush_size, pos, grid, drawing_color)
             except IndexError:
-
-                # We've clicked off the drawing, check if we clicked either Button or Shade Button
+                # We've clicked off the drawing, check if a button is clicked
                 is_color, button = check_button_clicked(buttons, pos)
                 is_shade, shade = check_button_clicked(current_shades, pos)
 

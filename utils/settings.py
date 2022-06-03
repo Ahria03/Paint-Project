@@ -1,11 +1,16 @@
-import pygame
-# https://www.w3schools.com/colors/colors_picker.asp
+"""
+The main settings of the program, there is where
+you can edit the window size, color values,
+interface font, and frames per second.
+"""
 
 # Initialize Pygame and its Font library
+import pygame
 pygame.init()
 pygame.font.init()
 
-# Different Colors in RGB Format
+# https://www.w3schools.com/colors/colors_picker.asp
+# Main Color values in RGB Format
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREY = (128, 128, 128)
@@ -16,8 +21,29 @@ PURPLE = (85, 0, 255)
 ORANGE = (255, 102, 0)
 YELLOW = (255, 255, 0)
 
+# Base FPS and size of Program
+FPS = 120
+x = pygame.display.Info()
+HEIGHT = (x.current_h // 100) * 100 - 100
+WIDTH = HEIGHT - 100
+ROWS = COLS = 50
+
+# Toolbar size and pixel size
+TOOLBAR_HEIGHT = HEIGHT - WIDTH
+PIXEL_SIZE = WIDTH // ROWS
+
+# Base background color and grid lines
+BG_COLOR = WHITE
+DRAW_GRID_LINES = True
+
+
+# Return Font at requested Size
+def get_font_size(size):
+    return pygame.font.SysFont("helvetica", size)
+
+
 # GREY SHADES
-GREYL2 = (0, 0, 0) # Just Black
+GREYL2 = (0, 0, 0)  # Just Black
 GREYL1 = (77, 77, 77)
 GREYR1 = (179, 179, 179)
 GREYR2 = (204, 204, 204)
@@ -57,30 +83,3 @@ YELLOWL2 = (77, 77, 0)
 YELLOWL1 = (153, 153, 0)
 YELLOWR1 = (255, 255, 51)
 YELLOWR2 = (255, 255, 128)
-
-# Base FPS and size of Program
-FPS = 180
-x = pygame.display.Info()
-h = (x.current_h // 100)*100 - 100
-WIDTH, HEIGHT = h - 100, h
-ROWS = COLS = 50
-
-# Toolbar size and pixel size
-# Does not need to be touched, change prior info instead.
-TOOLBAR_HEIGHT = HEIGHT - WIDTH
-PIXEL_SIZE = WIDTH // ROWS # Only works properly if ROWS divides WIDTH
-
-# Base background color
-BG_COLOR = WHITE
-DRAW_GRID_LINES = True
-
-def get_font_size(size):
-    """[Create a font of whatever size is given]
-
-    Args:
-        size ([Int]): [Size of Font]
-
-    Returns:
-        [String]: [The font Comic Sans in size]
-    """
-    return pygame.font.SysFont("arial", size)
