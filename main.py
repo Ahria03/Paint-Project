@@ -7,6 +7,8 @@ pygame.display.set_caption("Pyxel Art")
 run = True
 clock = pygame.time.Clock()
 grid = init_grid(ROWS, COLS, BG_COLOR)
+
+# Default Brush Settings
 drawing_color = BLACK
 current_shades = []
 brush_size = 1

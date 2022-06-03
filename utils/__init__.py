@@ -5,9 +5,9 @@ and bring in other imports and settings.
 """
 
 # Period designates to import from folder
-from .settings import *
-from .drawing import *
-from .button import *
+from .Settings import *
+from .Func import *
+from .Button import *
 import pygame
 
 # Initialize Pygame and its Font library
