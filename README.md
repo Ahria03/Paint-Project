@@ -10,4 +10,4 @@ change how a lot of it is formatted so it becomes more my own. Since this is
 one of my first ever side projects and first ever time using Pygame, I thought
 following a tutorial would be a great idea.
 
-Download here - https://github.com/Ahria03/Paint-Project/releases/new
+Download here - https://github.com/C-Teo/Paint-Project/releases
